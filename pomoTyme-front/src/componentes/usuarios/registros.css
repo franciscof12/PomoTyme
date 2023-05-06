@@ -1,0 +1,42 @@
+.login-background {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("pomobackground.svg") no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  .contenedorLOGIN {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .cartaForm{
+    background-color: rgba(248, 248, 248, 0.55);
+    padding: 25px;
+    width: 450px;
+    height: 420px;
+    border: none;
+    border-radius: 20px;
+    position: relative;
+    bottom: 120px;
+  }
+  .datos{
+    margin-bottom: 50px;
+  }
+
+  .botonLogin{
+    background-color: rgba(64, 111, 152, 0.667);
+    color: black;
+    border: none;
+    padding: 10px;
+  }
+  .botonLogin:hover{
+    background-color: rgba(0, 121, 227, 0.842);
+    color: white;
+    border: none;
+    padding: 10px;
+  }
+ 
