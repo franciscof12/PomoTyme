@@ -19,9 +19,9 @@ const Formulario = () => {
     const [error, seterror] = useState("initialState")
 
     const opcionesCategorias = [
-        { value: "urgente", label: "Urgente" },
-        { value: "importante", label: "Importante" },
-        { value: "normal", label: "Normal" },
+        { value: "Urgente", label: "Urgente" },
+        { value: "Importante", label: "Importante" },
+        { value: "Normal", label: "Normal" },
     ];
 
     const editaItem = (tarea) => {
@@ -74,8 +74,9 @@ const Formulario = () => {
         >
             <div style={{display:'flex', flexDirection:'row'}} className={`textoTarea${x.realizada ? " realizada" : ""}`}>
                 <Col className="col-10">{x.descripcion}</Col>
-                <Col style={{color:'lightcoral'}}>{x.categoria}</Col>
+                
             </div>
+            <Col style={{color:'lightcoral'}}>{x.categoria}</Col>
             <div className="contenedorIconos">
                 {x.realizada ? null : (
                     <Button
@@ -212,6 +213,12 @@ const Formulario = () => {
                             value={item}
                             onChange={(e) => setitem(e.target.value)}
                             placeholder="¿Que tareas realizaremos hoy?"
+                            onKeyPress={(e) => {
+                                if (e.key === 'Enter') {
+                                    nuevoItem();
+                                    e.preventDefault();
+                                }
+                            }}
                         />
                         <Form.Select
                             className="inputCategoria"
@@ -228,6 +235,7 @@ const Formulario = () => {
                             className="input-btn"
                             variant="success"
                             onClick={nuevoItem}
+                        
                         >Añadir</button>
                     </Form.Group>
 

@@ -6,7 +6,6 @@ import { useContext, useState, useEffect, useRef } from "react";
 import AjustesContext from "./AjustesContext";
 import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz';
 
-
 const Temporizador = () => {
     const AjustesInformacion = useContext(AjustesContext);
     const [pausado, setpausado] = useState(true);
@@ -18,9 +17,6 @@ const Temporizador = () => {
     const [ciclosCompletados, setCiclosCompletados] = useState(0);
     const [temporizadorIntervalId, setTemporizadorIntervalId] = useState(null);
     const [cicloEnProgreso, setCicloEnProgreso] = useState(false);
-
-
-
 
     async function guardarSesionPomodoro(tiempoEstudio, tiempoDescanso) {
         const url = 'http://localhost:3000/api/pomodoros';
@@ -82,7 +78,7 @@ const Temporizador = () => {
 
     const AlertaReloj = () => {
         const audio = new Audio('src/assets/Alerta.mp3');
-        audio.volume = 0.4;
+        audio.volume = 0.1;
         audio.play();
     };
 
@@ -132,7 +128,7 @@ const Temporizador = () => {
             }
 
             tick()
-        }, 1000)
+        }, 10)
 
         console.log('Temporizador creado:', temporizador);
 
@@ -166,7 +162,7 @@ const Temporizador = () => {
 
     return (
         <>
-            <CircularProgressbar className='circulo' value={valorPomodoro} text={`${minutosPomodoro}:${segundosPomodoro}`} styles={buildStyles({ textColor: 'white', pathColor: modo === 'estudio' ? 'rgba(113, 6, 6, 0.696)' : 'rgba(117, 244, 82, 0.696)', trailColor: 'rgba(250,250,250, .2)' })} />
+            <CircularProgressbar className='circulo' value={valorPomodoro} text={`${minutosPomodoro}:${segundosPomodoro}`} styles={buildStyles({ textColor: 'white', pathColor: modo === 'estudio' ? 'rgba(49, 14, 94, 0.8)' : 'rgba(117, 244, 82, 0.696)', trailColor: 'rgba(250,250,250, .2)' })} />
             <section className='player'>
                 {!cicloEnProgreso && pausado ?
                     <button onClick={iniciarCiclo} className='iconoPlayer'><FontAwesomeIcon className='iconoPlayer' size='6x' icon={faPlay} /></button>

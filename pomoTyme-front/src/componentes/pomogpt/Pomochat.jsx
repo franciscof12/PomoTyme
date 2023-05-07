@@ -84,23 +84,21 @@ const Pomochat = () => {
         })
     }
 
-
-
     return (
-        <div style={{ position: 'relative', height: '500px', width: '100%' }}>
+        <div style={{ position: 'relative', height: '700px', width: '100%' }}>
             <MainContainer style={{ border: 'none', borderRadius: '10px' }}>
                 <ChatContainer>
-                    <ConversationHeader style={{ border: 'none', backgroundColor: '#7895B2' }}  >
+                    <ConversationHeader style={{ border: 'none', backgroundColor: 'rgba(117, 79, 163, 0.49)' }}  >
                         <Avatar src='robot.png' name="PomoGPT" />
                     </ConversationHeader>
-                    <MessageList style={{ border: 'none', backgroundColor: '#7895B2', padding:'15px' }}
+                    <MessageList style={{ border: 'none', backgroundColor: 'rgba(117, 79, 163, 0.49)', padding:'15px' }}
                         scrollBehavior='smooth'
                         typingIndicator={escribiendo ? <TypingIndicator style={{ border: 'none', backgroundColor: 'transparent', borderRadius: '30px' }} content='PomoGPT esta escribiendo' /> : null}>
                         {mensajes.map((mensaje, i) => {
                             return <Message style={{ borderRadius: '15px' }} key={i} model={mensaje} />
                         })}
                     </MessageList>
-                    <MessageInput style={{padding:'15px', backgroundColor: '#7895B2', borderTop: 'rgba(96, 59, 11, 0.78)' }} attachButton={false} placeholder='Preguntame lo que quieras!' onSend={enviar} />
+                    <MessageInput style={{padding:'15px', backgroundColor: 'rgba(117, 79, 163, 0.3)', borderTop: 'rgba(96, 59, 11, 0.78)' }} attachButton={false} placeholder='Preguntame lo que quieras!' onSend={enviar} />
                 </ChatContainer>
             </MainContainer>
         </div>

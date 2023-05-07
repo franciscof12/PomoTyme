@@ -3,13 +3,15 @@ import { Container, Col, Row, Button } from "react-bootstrap";
 import { utcToZonedTime } from 'date-fns-tz';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faGraduationCap} from "@fortawesome/free-solid-svg-icons";
+import { format } from 'date-fns-tz';
+
 
 
 const Estadisticas = () => {
   const [sesiones, setSesiones] = useState(null);
   const [estadisticas, setEstadisticas] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const timeZone = 'Europe/Berlin'; // La zona horaria de Europa Central
+  const timeZone = 'Europe/Madrid';
 
 
   const findTodayIndex = (days) => {
@@ -141,7 +143,6 @@ const Estadisticas = () => {
 
   return (
     <Container className="pantallaEstadisticas">
-    
       <Row>
         {estadisticas ? (
           <section className="contenedorEstadisticas">
@@ -165,7 +166,7 @@ const Estadisticas = () => {
               <section className="contenedorInformacion" >
                 <div>
                   <h2>Tiempo total de estudio <FontAwesomeIcon icon={faGraduationCap} /></h2>
-                  <h4 style={{textAlign:'center', color:'orange'}}>
+                  <h4 style={{textAlign:'center', color: 'darkblue'}}>
                     {estadisticas[Object.keys(estadisticas)[activeIndex]].tiempoEstudioTotal > 60
                       ? `${estadisticas[Object.keys(estadisticas)[activeIndex]].tiempoEstudioHoras} horas y ${estadisticas[Object.keys(estadisticas)[activeIndex]].tiempoEstudioMinutos} minutos`
                       : `${estadisticas[Object.keys(estadisticas)[activeIndex]].tiempoEstudioTotal} minutos`}
