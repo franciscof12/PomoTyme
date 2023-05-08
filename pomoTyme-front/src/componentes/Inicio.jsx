@@ -6,12 +6,18 @@ import AjustesContext from "./AjustesContext";
 import Formulario from "./to-do-list/Formulario";
 import Pomochat from "./pomogpt/Pomochat";
 
-
-
-const Inicio = () => {
+const Inicio = (props) => {
   const [muestraAjustes, setmuestraAjustes] = useState(false);
   const [tiempoEstudio, setTiempoEstudio] = useState(45);
   const [tiempoDescanso, settiempoDescanso] = useState(15);
+  const [tiempoRestante, settiempoRestante] = useState(0);
+
+  const onTiempoRestanteChange = (tiempoRestante) => {
+    settiempoRestante(tiempoRestante);
+  };
+
+  const minutosRestantes = Math.floor(tiempoRestante / 60);
+  const segundosRestantes = tiempoRestante % 60;
 
   return (
     <>
@@ -30,7 +36,11 @@ const Inicio = () => {
                     settiempoDescanso,
                   }}
                 >
-                  {muestraAjustes ? <PantallaAjuste /> : <Temporizador />}
+                  {muestraAjustes ? (
+                    <PantallaAjuste />
+                  ) : (
+                    <Temporizador onTiempoRestanteChange={onTiempoRestanteChange} />
+                  )}
                 </AjustesContext.Provider>
               </Col>
             </Row>
@@ -45,6 +55,9 @@ const Inicio = () => {
         </Row>
 
         <Container fluid className="contenedores3">
+          <h3 style={{marginBottom: '15px'}}>
+            PomoTimer: Animo! aun quedan {minutosRestantes} minutos restantes
+          </h3>
           <Row>
             <Col xs={12} md className="coltemporizador">
               <Pomochat />

@@ -6,7 +6,7 @@ import { useContext, useState, useEffect, useRef } from "react";
 import AjustesContext from "./AjustesContext";
 import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz';
 
-const Temporizador = () => {
+const Temporizador = (props) => {
     const AjustesInformacion = useContext(AjustesContext);
     const [pausado, setpausado] = useState(true);
     const [tiempoRestante, settiempoRestante] = useState(0);
@@ -17,22 +17,24 @@ const Temporizador = () => {
     const [ciclosCompletados, setCiclosCompletados] = useState(0);
     const [temporizadorIntervalId, setTemporizadorIntervalId] = useState(null);
     const [cicloEnProgreso, setCicloEnProgreso] = useState(false);
+    const { onTiempoRestanteChange } = props;
+
 
     async function guardarSesionPomodoro(tiempoEstudio, tiempoDescanso) {
         const url = 'http://localhost:3000/api/pomodoros';
         const token = localStorage.getItem('token');
         const timeZone = 'Europe/Berlin'; // La zona horaria de Europa Central
-    
+
         const fechaInicioLocal = new Date();
         const fechaInicioCET = utcToZonedTime(fechaInicioLocal, timeZone);
         const fechaInicio = fechaInicioCET.toISOString();
-    
+
         // Calcula la fecha de finalización sumando la duración de la sesión al tiempo actual en CET
         const duracionSesion = tiempoEstudio + tiempoDescanso;
         const fechaFinLocal = new Date(Date.now() + duracionSesion * 60 * 1000);
         const fechaFinCET = utcToZonedTime(fechaFinLocal, timeZone);
         const fechaFin = fechaFinCET.toISOString();
-    
+
         const config = {
             method: 'POST',
             headers: {
@@ -54,7 +56,7 @@ const Temporizador = () => {
             console.error(error);
         }
     }
-    
+
 
     const reiniciarTemporizador = () => {
         setpausado(true);
@@ -128,7 +130,7 @@ const Temporizador = () => {
             }
 
             tick()
-        }, 10)
+        }, 1000)
 
         console.log('Temporizador creado:', temporizador);
 
@@ -159,6 +161,13 @@ const Temporizador = () => {
     if (segundosPomodoro < 10) {
         segundosPomodoro = '0' + segundosPomodoro;
     }
+
+     
+    useEffect(() => {
+        //Para actualizar el temporizador en tiempo real en Inicio en otras partes de la vista principal        
+        onTiempoRestanteChange(tiempoRestante);
+    }, [tiempoRestante]);
+
 
     return (
         <>
